@@ -10,4 +10,10 @@ final class Json
     {
         return json_decode($json, true, 512, JSON_THROW_ON_ERROR);
     }
+
+    /** @var object|mixed[] $input */
+    public static function encode($input): string
+    {
+        return json_encode($input, JSON_THROW_ON_ERROR);
+    }
 }

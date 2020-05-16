@@ -28,4 +28,27 @@ final class JsonTest extends TestCase
         $this->expectException(JsonException::class);
         Json::decode(self::NOT_VALID_JSON);
     }
+
+    /** @test */
+    public function it_encodes_arrays(): void
+    {
+        self::assertEquals(self::VALID_JSON, Json::encode(self::VALID_JSON_AS_ARRAY));
+    }
+
+    /** @test */
+    public function it_fails_to_encode_input_too_nested(): void
+    {
+        $this->expectException(JsonException::class);
+        Json::encode($this->buildTooNestedObjectTree());
+    }
+
+    private function buildTooNestedObjectTree(): Doge
+    {
+        $currentLevel = new Doge();
+        for ($i = 0; $i < 512; $i++) {
+            $currentLevel = new Doge($currentLevel);
+        }
+
+        return $currentLevel;
+    }
 }
