@@ -1,0 +1,38 @@
+{
+    "name": "xoubaman/json",
+    "description": "A simple JSON wrapper",
+    "keywords": [
+        "json"
+    ],
+    "license": [
+        "MIT"
+    ],
+    "require": {
+        "php": "^7.2"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master",
+        "phpunit/phpunit": "^9.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Xoubaman\\Json\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Xoubaman\\Json\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "phpunit": "vendor/bin/phpunit",
+        "phpstan": "vendor/bin/phpstan analyse",
+        "style": "phpcs -p --standard=PSR12 src tests",
+        "fix-style": "phpcbf -p --standard=PSR12 src tests",
+        "all-checks": [
+            "phpcs -p --standard=PSR12 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests",
+            "vendor/bin/phpunit",
+            "vendor/bin/phpstan analyse"
+        ]
+    }
+}
