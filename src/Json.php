@@ -16,7 +16,7 @@ final class Json
     /** @var int */
     private $errorCode;
 
-    public function __construct(string $input)
+    private function __construct(string $input)
     {
         try {
             $this->input     = $input;
@@ -27,6 +27,11 @@ final class Json
             $this->error     = $ex->getMessage();
             $this->errorCode = $ex->getCode();
         }
+    }
+
+    public static function fromString(string $json): self
+    {
+        return new self($json);
     }
 
     /**

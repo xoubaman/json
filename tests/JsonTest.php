@@ -46,7 +46,7 @@ final class JsonTest extends TestCase
     /** @test */
     public function it_handles_valid_json(): void
     {
-        $validJson = new Json(self::VALID_JSON);
+        $validJson = Json::fromString(self::VALID_JSON);
         self::assertEquals(self::VALID_JSON, $validJson->input());
         self::assertEquals(self::VALID_JSON_AS_ARRAY, $validJson->asArray());
         self::assertTrue($validJson->isValid());
@@ -57,7 +57,7 @@ final class JsonTest extends TestCase
     /** @test */
     public function it_handles_not_valid_json(): void
     {
-        $notValidJson = new Json(self::NOT_VALID_JSON);
+        $notValidJson = Json::fromString(self::NOT_VALID_JSON);
         self::assertEquals(self::NOT_VALID_JSON, $notValidJson->input());
         self::assertFalse($notValidJson->isValid());
         self::assertEquals('Syntax error', $notValidJson->error());
@@ -67,7 +67,7 @@ final class JsonTest extends TestCase
     /** @test */
     public function it_fails_when_getting_decoded_array_from_not_valid_json(): void
     {
-        $notValidJson = new Json(self::NOT_VALID_JSON);
+        $notValidJson = Json::fromString(self::NOT_VALID_JSON);
         $this->expectException(RuntimeException::class);
         $notValidJson->asArray();
     }
